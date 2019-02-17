@@ -9,9 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
 import com.example.labrecycleview.adapters.LineAdapter;
 import com.example.labrecycleview.fragments.ListaVerticalFragment;
+import com.example.labrecycleview.fragments.RecycleGridFragment;
 import com.example.labrecycleview.models.UserModel;
 
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 public class LinearLayoutActivity extends AppCompatActivity {
 
     FloatingActionButton fab;
-
+    Button btnHorizontal, btnVertical;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,12 +29,34 @@ public class LinearLayoutActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        btnHorizontal = findViewById(R.id.btn_horizontal);
+        btnVertical = findViewById(R.id.btn_vertical);
         fab = findViewById(R.id.fab);
 
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.main_fragment, new ListaVerticalFragment(fab))
                 .commit();
+
+        btnHorizontal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_fragment, new RecycleGridFragment(fab))
+                        .commit();
+            }
+        });
+
+        btnVertical.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_fragment, new ListaVerticalFragment(fab))
+                        .commit();
+            }
+        });
 
 
     }

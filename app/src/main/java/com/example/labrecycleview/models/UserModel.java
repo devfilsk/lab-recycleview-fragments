@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class UserModel implements Serializable {
 
-    private String name, city;
+    private String name, city, text;
     private int age;
 
     public UserModel(){
@@ -17,12 +17,27 @@ public class UserModel implements Serializable {
         this.city = city;
     }
 
+    public UserModel(String name, String city, String text, int age) {
+        this.name = name;
+        this.city = city;
+        this.text = text;
+        this.age = age;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public int getAge() {
