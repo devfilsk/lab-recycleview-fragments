@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.RecycleGridFragment">
+    tools:context=".fragments.GridLayoutFragment">
+
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/grid_recycle_view"
+        android:id="@+id/grid_view"
         android:layout_width="395dp"
         android:layout_height="715dp"
         android:layout_marginStart="8dp"

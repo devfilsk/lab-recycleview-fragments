@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.labrecycleview.R;
-import com.example.labrecycleview.adapters.GridAdapter;
 import com.example.labrecycleview.adapters.LineAdapter;
 import com.example.labrecycleview.models.UserModel;
 
@@ -22,19 +21,19 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RecycleGridFragment extends Fragment {
-
+public class LinearVerticalFragment extends Fragment {
     RecyclerView mRecyclerView;
-    GridAdapter mAdapter = new GridAdapter(new ArrayList<>(0));
+    LineAdapter mAdapter = new LineAdapter(new ArrayList<>(0));
     View view;
     FloatingActionButton fab;
 
-    public RecycleGridFragment() {
+
+    public LinearVerticalFragment() {
         // Required empty public constructor
     }
 
     @SuppressLint("ValidFragment")
-    public RecycleGridFragment(FloatingActionButton fab) {
+    public LinearVerticalFragment(FloatingActionButton fab) {
         this.fab = fab;
     }
 
@@ -43,8 +42,10 @@ public class RecycleGridFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.fragment_recycle_grid, container, false);
-        mRecyclerView = view.findViewById(R.id.grid_recycle_view);
+        View view = inflater.inflate(R.layout.fragment_linear_vertical, container, false);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.main_recycle_view);
+
+        this.view = view;
         setupRecycler();
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -54,27 +55,29 @@ public class RecycleGridFragment extends Fragment {
 //                        .setAction("Action", null).show();
 
                 UserModel userModel = new UserModel();
-                userModel.setName("Grid View Filipe");
+                userModel.setName("Filipe Maciel");
                 userModel.setAge(24);
                 userModel.setCity("Uruaçu");
-                userModel.setText("Aqui é um texto de texte para textar o texto, sacou?");
                 mAdapter.updateList(userModel);
             }
         });
 
         return view;
-    }
 
+    }
     private void setupRecycler(){
-        // Configurando o gerenciador de layout para ser HORIZONTAL.
-        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        // Configurando o gerenciador de layout para ser uma lista.
+        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
         // Adiciona o adapter que irá anexar os objetos à lista.
         // Está sendo criado com lista vazia, pois será preenchida posteriormente.
-
         mRecyclerView.setAdapter(mAdapter);
 
-    }
+        // Configurando um dividr entre linhas, para uma melhor visualização.
+        mRecyclerView.addItemDecoration(
+                new DividerItemDecoration(view.getContext(), DividerItemDecoration.VERTICAL)
+        );
 
+    }
 }

@@ -2,26 +2,21 @@ package com.example.labrecycleview;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
-import com.example.labrecycleview.adapters.LineAdapter;
-import com.example.labrecycleview.fragments.ListaVerticalFragment;
-import com.example.labrecycleview.fragments.RecycleGridFragment;
-import com.example.labrecycleview.models.UserModel;
-
-import java.util.ArrayList;
+import com.example.labrecycleview.fragments.GridLayoutFragment;
+import com.example.labrecycleview.fragments.LinearVerticalFragment;
+import com.example.labrecycleview.fragments.LinearHorizontalFragment;
 
 public class LinearLayoutActivity extends AppCompatActivity {
 
     FloatingActionButton fab;
-    Button btnHorizontal, btnVertical;
+    Button btnHorizontal, btnVertical, btnGrid;
+    TextView title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +26,13 @@ public class LinearLayoutActivity extends AppCompatActivity {
 
         btnHorizontal = findViewById(R.id.btn_horizontal);
         btnVertical = findViewById(R.id.btn_vertical);
+        btnGrid = findViewById(R.id.btn_grid);
+        title = findViewById(R.id.txt_title);
         fab = findViewById(R.id.fab);
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.main_fragment, new ListaVerticalFragment(fab))
+                .add(R.id.main_fragment, new LinearVerticalFragment(fab))
                 .commit();
 
         btnHorizontal.setOnClickListener(new View.OnClickListener() {
@@ -43,8 +40,11 @@ public class LinearLayoutActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.main_fragment, new RecycleGridFragment(fab))
+                        .replace(R.id.main_fragment, new LinearHorizontalFragment(fab))
                         .commit();
+
+                title.setText("Linear Layout Horizontal");
+
             }
         });
 
@@ -53,8 +53,22 @@ public class LinearLayoutActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.main_fragment, new ListaVerticalFragment(fab))
+                        .replace(R.id.main_fragment, new LinearVerticalFragment(fab))
                         .commit();
+
+                title.setText("Linear Layout Vertical");
+            }
+        });
+
+        btnGrid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_fragment, new GridLayoutFragment(fab))
+                        .commit();
+
+                title.setText("Grid Layout Manager");
             }
         });
 
